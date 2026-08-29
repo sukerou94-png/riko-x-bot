@@ -261,7 +261,7 @@ def main():
     # リンク誘導投稿
     # ------------------------------------------
 
-    elif 21 <= hour <= 23:
+    if 21 <= hour <= 23:
 
         text = random.choice(link_posts)
         
