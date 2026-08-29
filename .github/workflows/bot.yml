@@ -2,7 +2,24 @@ name: Riko X Bot
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    # 日本時間 12:00
+    - cron: "0 3 * * *"
+
+    # 日本時間 14:00
+    - cron: "0 5 * * *"
+
+    # 日本時間 16:00
+    - cron: "0 7 * * *"
+
+    # 日本時間 18:00
+    - cron: "0 9 * * *"
+
+    # 日本時間 20:00
+    - cron: "0 11 * * *"
+
+    # 日本時間 22:00 リンク投稿
+    - cron: "0 13 * * *"
+
   workflow_dispatch:
 
 jobs:
@@ -28,4 +45,5 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          LINK_URL: ${{ secrets.LINK_URL }}
         run: python bot.py
