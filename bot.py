@@ -1,12 +1,12 @@
+from requests_oauthlib import OAuth1
 import os
 import random
 import time
-from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
-from requests_oauthlib import OAuth1
-
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # ==========================================
 # 設定
@@ -191,8 +191,7 @@ def post_to_x(text):
 
 def main():
 
-    now = datetime.now()
-
+    now = datetime.now(ZoneInfo("Asia/Tokyo"))
     print("================================")
     print("Riko X Bot 起動")
     print("現在時刻:", now.strftime("%Y-%m-%d %H:%M:%S"))
@@ -237,7 +236,7 @@ def main():
     # 待機後の現在時刻を再確認
     # ------------------------------------------
 
-    now = datetime.now()
+    now = datetime.now(ZoneInfo("Asia/Tokyo"))
     hour = now.hour
 
     print("実際の投稿判定時刻:", now.strftime("%H:%M:%S"))
@@ -247,16 +246,16 @@ def main():
     # 通常投稿
     # ------------------------------------------
 
-if 9 <= hour <= 20:
+    if 9 <= hour <= 20:
 
-    wait_minutes = random.randint(3, 55)
-    print(f"あと{wait_minutes}分待って通常投稿します。")
-    time.sleep(wait_minutes * 60)
-
-    text = random.choice(posts)
-
-    print("通常投稿を選択しました。")
-    post_to_x(text)
+        wait_minutes = random.randint(3, 55)
+        print(f"あと{wait_minutes}分待って通常投稿します。")
+        time.sleep(wait_minutes * 60)
+        
+        text = random.choice(posts)
+        
+        print("通常投稿を選択しました。")
+        post_to_x(text)
     # ------------------------------------------
     # 21:00〜23:59
     # リンク誘導投稿
@@ -265,10 +264,10 @@ if 9 <= hour <= 20:
     elif 21 <= hour <= 23:
 
         text = random.choice(link_posts)
-
+        
         # URLを投稿本文に追加
         text = text + "\n" + LINK_URL
-
+        
         print("リンク投稿を選択しました。")
         post_to_x(text)
 
