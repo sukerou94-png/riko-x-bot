@@ -247,13 +247,16 @@ def main():
     # 通常投稿
     # ------------------------------------------
 
-    if 9 <= hour <= 20:
+if 9 <= hour <= 20:
 
-        text = random.choice(posts)
+    wait_minutes = random.randint(3, 55)
+    print(f"あと{wait_minutes}分待って通常投稿します。")
+    time.sleep(wait_minutes * 60)
 
-        print("通常投稿を選択しました。")
-        post_to_x(text)
+    text = random.choice(posts)
 
+    print("通常投稿を選択しました。")
+    post_to_x(text)
     # ------------------------------------------
     # 21:00〜23:59
     # リンク誘導投稿
